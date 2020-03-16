@@ -344,8 +344,8 @@ $ docker run -p 5000:5000 ptt-python
 但容器之間的端口是沒有通的需要將兩個容器連接到同一個網路並且查看IP否則python會無法連線到資料庫會產生錯誤，範例指令如下：
 ```Docker
 $ docker network create myNetwork
-$ docker network connect myNetwork container1
-$ docker network connect myNetwork container2
+$ docker network connect myNetwork mongodb-container
+$ docker network connect myNetwork python-container
 ```
 
 連接後可以在本機透過瀏覽器測試爬蟲是否運行成功。
