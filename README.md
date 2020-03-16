@@ -15,7 +15,7 @@
 2. 安裝完成後於終端機進行映像檔安裝，需要安裝的項目有：
     - mongodb(使用官方的image)
     - python(使用官方的image修改後建立自己的image)
-
+安裝指令如下：
 ```sh
 $ docker pull mongo
 $ docker pull python
@@ -325,3 +325,27 @@ for x in mycol.find({},{ "_id": 0, "title": 1 , "author": 1 , "link": 1 }):
 ```Docker
 $ docker build -t ptt-python .
 ```
+
+映像檔建立完成後查看是否有兩個image已經建立，指令如下：
+```Docker
+$ docker images
+```
+
+確定映像檔建立完成後要透過映像檔建立容器，建立的同時會需要設定開啟容器對本機的端口，才能確定容器開啟後有達到需求（資料庫需要開啟的端口為27017、Python需要開啟的端口為5000），指令如下：
+```Docker
+$ docker run -p 27017:27017 mongo
+$ docker run -p 5000:5000 ptt-python
+```
+
+可以透過 Docker Desktop 看到容器已經在執行中，也可以透過瀏覽器輸入網址查看是否有連線到
+1. mongodb網址輸入：localhost:27017
+2. Python網址輸入：localhost:5000
+
+但容器之間的端口是沒有通的需要將兩個容器連接到同一個網路並且查看IP否則python會無法連線到資料庫會產生錯誤，範例指令如下：
+```Docker
+$ docker network create myNetwork
+$ docker network connect myNetwork container1
+$ docker network connect myNetwork container2
+```
+
+連接後可以在本機透過瀏覽器測試爬蟲是否運行成功。
