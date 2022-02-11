@@ -18,7 +18,7 @@ lxml==4.5.0
 MarkupSafe==1.1.1
 mccabe==0.6.1
 parse==1.15.0
-protobuf==3.6.1
+protobuf==3.15.0
 pyee==7.0.1
 pylint==2.4.4
 pymongo==3.10.1
